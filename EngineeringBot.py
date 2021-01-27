@@ -40,6 +40,13 @@ async def on_message(message):
                 await message.channel.send(string)
             except:
                 await message.channel.send("Role not found!")
+    elif message.content.startswith('>>classes'):
+        f = open("classes.txt","r")
+        string = ""
+        for line in f:
+            string = string + line
+        f.close()
+        await message.channel.send(string)
 
 @client.event
 async def on_member_join(member):

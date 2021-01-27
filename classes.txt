@@ -1,0 +1,6 @@
+Here are all of the classes currently supported:
+ece2400
+ece2410
+ece3330
+ece3350
+cs3300
