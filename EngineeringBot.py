@@ -2,6 +2,7 @@ import discord
 import os
 import asyncio
 import time
+import re
 from discord.ext import commands
 
 intents = discord.Intents.default()
@@ -41,11 +42,14 @@ async def on_message(message):
             except:
                 await message.channel.send("Role not found!")
     elif message.content.startswith('>>classes'):
-        f = open("classes.txt","r")
-        string = ""
-        for line in f:
-            string = string + line
-        f.close()
+        classMatcher = re.compile(r'[a-z]+[0-9]+')
+        string = "The classes currently supported are: \n"
+        roles = []
+        for y in message.guild.roles:
+            roles.append(y.name)
+        classes = [x for x in roles if classMatcher.match(x)]
+        for role in classes:
+            string = string + role + "\n"
         await message.channel.send(string)
 
 @client.event
