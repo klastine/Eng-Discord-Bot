@@ -28,6 +28,18 @@ async def on_message(message):
                 await message.channel.send(string)
             except:
                 await message.channel.send("Role not found!")
+    elif message.content.startswith('>>leaveall'):
+        classMatcher = re.compile(r'[a-z]+[0-9]+')
+        content = message.content.split()
+        for role in message.author.roles:
+            try:
+                if classMatcher.match(role.name):
+                    await message.author.remove_roles(role)
+            except Exception as e:
+                print(e)
+                #await message.channel.send("Error!")
+        string = "Left all classes!"
+        await message.channel.send(string)
     elif message.content.startswith('>>leave'):
         content = message.content.split()
         if len(content) != 2:
